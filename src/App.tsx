@@ -26,7 +26,6 @@ const columns = [
 ];
 
 const lcgPriorityParams = {
-  seed: 42, // Initial seed
   a: 1664525, // Multiplier
   c: 1013904223, // Increment
   m: 2 ** 32, // Modulus
@@ -72,6 +71,7 @@ function App() {
 
     const priorities = generateRandomPriorities({
       ...lcgPriorityParams,
+      seed: values.randomNumber,
       count: values.numOfEntries!,
     });
     const arrivalTimes = generateArrivalTimes(
