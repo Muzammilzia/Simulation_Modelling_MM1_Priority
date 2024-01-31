@@ -1,6 +1,14 @@
 // ResponsiveTable.tsx
-import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 
 interface TableColumn {
   id: string;
@@ -18,12 +26,15 @@ interface TableProps {
 
 const ResponsiveTable: React.FC<TableProps> = ({ columns, data }) => {
   return (
-    <TableContainer component={Paper} sx={{ overflowX: 'auto' }}>
-      <Table size='medium' aria-label="responsive table">
+    <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
+      <Table size="medium" aria-label="responsive table">
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell key={column.id} sx={{ fontWeight: 'bold', borderBottom: '2px solid #dee2e6' }}>
+              <TableCell
+                key={column.id}
+                sx={{ fontWeight: "bold", borderBottom: "2px solid #dee2e6" }}
+              >
                 {column.label}
               </TableCell>
             ))}
@@ -32,9 +43,22 @@ const ResponsiveTable: React.FC<TableProps> = ({ columns, data }) => {
         <TableBody>
           {data.map((row, index) => (
             <TableRow key={index}>
-              {columns.map((column) => (
-                <TableCell key={column.id}>{row[column.id]}</TableCell>
-              ))}
+              {columns.map((column) => {
+                if (column.id === "priority") {
+                  return (
+                    <TableCell key={column.id}>
+                      {row[column.id] === 1
+                        ? "high"
+                        : row[column.id] === 2
+                        ? "medium"
+                        : row[column.id] === 3
+                        ? "low"
+                        : row[column.id]}
+                    </TableCell>
+                  );
+                }
+                return <TableCell key={column.id}>{row[column.id]}</TableCell>;
+              })}
             </TableRow>
           ))}
         </TableBody>
