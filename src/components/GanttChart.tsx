@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Paper, Typography } from "@mui/material";
-import { Customer, GanttChartItem } from "../interface/customer.interface";
+import { Box, Typography } from "@mui/material";
+import { GanttChartItem } from "../interface/customer.interface";
 
 interface GanttChartProps {
   customers: GanttChartItem[];
